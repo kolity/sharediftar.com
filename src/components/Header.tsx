@@ -16,7 +16,7 @@ const NavLink = ({ href, icon: Icon, children }: { href: string; icon: React.Ele
 
 const BrandName = () => (
   <Link href="/" className="flex items-center">
-    <span className="text-xl font-bold text-gray-900">ShareIftar.com</span>
+    <span className="text-xl font-bold text-gray-900">SharedIftar.com</span>
   </Link>
 );
 
