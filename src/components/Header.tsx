@@ -65,7 +65,7 @@ const Header = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           <div className="flex items-center space-x-2">
-            <NavLink href="/ifthar" icon={UtensilsCrossed}>Ifthar</NavLink>
+            <NavLink href="/iftar" icon={UtensilsCrossed}>Iftar</NavLink>
             <NavLink href="/recipes" icon={Book}>Recipes</NavLink>
             <NavLink href="/imsak" icon={Clock}>Imsak</NavLink>
           </div>
