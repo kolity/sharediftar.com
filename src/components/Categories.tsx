@@ -14,21 +14,21 @@ const categories: CategoryItem[] = [
   {
     id: 'home-cooked',
     name: 'Home Cooked Iftar',
-    image: '/images/home-cooked.jpg',
+    image: '/iftar/iftar-home-cooked.png',
     description: 'Authentic homemade meals prepared with love and care by local families willing to share their Iftar blessings.',
     totalItems: 45
   },
   {
     id: 'community',
     name: 'Community Iftars',
-    image: '/images/community.jpg',
+    image: '/iftar/iftar-community-organized.png',
     description: 'Join group Iftars hosted by mosques, community centers, and generous individuals in your neighborhood.',
     totalItems: 28
   },
   {
     id: 'special-needs',
     name: 'Special Dietary Needs',
-    image: '/images/special-needs.jpg',
+    image: '/iftar/iftar-special.png',
     description: 'Specially prepared Iftar meals catering to various dietary requirements including vegetarian, vegan, and gluten-free options.',
     totalItems: 32
   }
