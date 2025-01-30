@@ -2,21 +2,27 @@ import React from 'react';
 
 const About = () => {
   return (
-    <section className="bg-red-500 text-white py-12">
+    <section className="bg-red-500 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold mb-6">Who We Are ?</h2>
-        <div className="max-w-3xl mx-auto">
-          <p className="mb-4 text-lg">
-            Roadha.com is back for the 11th consecutive year. This year Roadha.com is being
-            relaunched by its original developers following the wide public support and interest given
-            to ROADHAVEELLUN.COM 2007.
+        <h2 className="text-3xl font-bold mb-8">Our Mission</h2>
+        <div className="max-w-3xl mx-auto space-y-6">
+          <p className="text-lg leading-relaxed">
+            SharedIftar.com is a platform dedicated to reviving the beautiful tradition of sharing 
+            Iftar meals during Ramadan. We believe in strengthening community bonds by connecting 
+            those who wish to share their blessings with those seeking to join in the spirit of 
+            breaking fast together.
           </p>
-          <p className="mb-8 text-lg">
-            The website registered over 14,000 visitors and over 800,000 hits within ONE month.
+          <p className="text-lg leading-relaxed">
+            Our platform facilitates meaningful connections between hosts and guests, ensuring that 
+            no one breaks their fast alone. Whether you&apos;re a family looking to share your home-cooked 
+            meals, a mosque organizing community Iftars, or someone seeking the warmth of community 
+            during Ramadan, SharedIftar.com brings everyone together.
           </p>
-          <button className="bg-black hover:bg-gray-900 text-white px-8 py-2 rounded-full transition-colors">
-            Learn More
-          </button>
+          <div className="pt-4">
+            <button className="bg-white text-red-500 hover:bg-gray-100 px-8 py-3 rounded-xl transition-colors font-semibold">
+              Join Our Community
+            </button>
+          </div>
         </div>
       </div>
     </section>
