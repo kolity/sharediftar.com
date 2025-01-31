@@ -29,12 +29,12 @@ const BrandName = () => (
 const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
   <>
     {/* Overlay */}
-    <div
-      className={`fixed inset-0 bg-black transition-opacity duration-300 ${
-        isOpen ? "opacity-60 pointer-events-auto" : "opacity-0 pointer-events-none"
-      }`}
-      onClick={onClose}
-    />
+    {isOpen && (
+      <div
+        className="fixed inset-0 bg-black opacity-60"
+        onClick={onClose}
+      />
+    )}
 
     {/* Menu */}
     <div
@@ -85,6 +85,10 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <header className="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-gray-100">
       <nav className="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
@@ -113,7 +117,7 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button 
           className="md:hidden p-2 hover:bg-red-50 rounded-lg transition-colors duration-200"
-          onClick={() => setIsMobileMenuOpen(true)}
+          onClick={toggleMobileMenu}
         >
           <Menu className="w-6 h-6 text-gray-600" />
         </button>
@@ -121,7 +125,7 @@ const Header = () => {
         {/* Mobile Menu */}
         <MobileMenu 
           isOpen={isMobileMenuOpen} 
-          onClose={() => setIsMobileMenuOpen(false)} 
+          onClose={toggleMobileMenu}
         />
       </nav>
     </header>
