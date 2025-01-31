@@ -1,38 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-interface CategoryItem {
-  id: string;
-  name: string;
-  image: string;
-  description: string;
-  totalItems: number;
-}
-
-const categories: CategoryItem[] = [
-  {
-    id: 'home-cooked',
-    name: 'Home Cooked Iftar',
-    image: '/iftar/iftar-home-cooked.png',
-    description: 'Authentic homemade meals prepared with love and care by local families willing to share their Iftar blessings.',
-    totalItems: 45
-  },
-  {
-    id: 'community',
-    name: 'Community Iftars',
-    image: '/iftar/iftar-community-organized.png',
-    description: 'Join group Iftars hosted by mosques, community centers, and generous individuals in your neighborhood.',
-    totalItems: 28
-  },
-  {
-    id: 'special-needs',
-    name: 'Special Dietary Needs',
-    image: '/iftar/iftar-special.png',
-    description: 'Specially prepared Iftar meals catering to various dietary requirements including vegetarian, vegan, and gluten-free options.',
-    totalItems: 32
-  }
-];
+import { categories, type CategoryItem } from '@/data/categories';
 
 const CategoryCard = ({ name, image, description, totalItems, id }: CategoryItem) => (
   <Link href={`/categories/${id}`} className="block">
@@ -72,7 +41,8 @@ const Categories = () => (
       </div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {categories.map((category) => (
+      {/* Show first three categories from imported data */}
+      {categories.slice(0, 3).map((category) => (
         <CategoryCard key={category.id} {...category} />
       ))}
     </div>
