@@ -26,7 +26,6 @@ const BrandName = () => (
   </Link>
 );
 
-
 const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
   <>
     <div
@@ -36,7 +35,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
       onClick={onClose}
     ></div>
     <div
-      className={`fixed top-0 right-0 bottom-0 w-9/12 max-w-sm bg-white/95 backdrop-blur-sm shadow-lg z-50 transition-transform duration-300 ${
+      className={`fixed top-0 right-0 bottom-0 w-9/12 max-w-sm bg-white/80 shadow-lg z-50 transition-transform duration-300 ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
@@ -50,7 +49,6 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         </button>
       </div>
 
-      
       <nav className="p-6">
         <div className="flex flex-col gap-6">
           <NavLink href="/iftar" icon={UtensilsCrossed}>
