@@ -35,7 +35,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     
     <nav className="p-4">
       <div className="flex flex-col gap-4">
-        <NavLink href="/ifthar" icon={UtensilsCrossed}>Ifthar</NavLink>
+        <NavLink href="/iftar" icon={UtensilsCrossed}>Iftar</NavLink>
         <NavLink href="/recipes" icon={Book}>Recipes</NavLink>
         <NavLink href="/imsak" icon={Clock}>Imsak</NavLink>
         
