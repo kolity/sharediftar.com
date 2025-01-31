@@ -29,7 +29,7 @@ const BrandName = () => (
 const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
   <div 
     className={`fixed inset-0 bg-white/95 backdrop-blur-sm z-50 transform transition-all duration-300 ${
-      isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+      isOpen ? 'translate-x-0 opacity-60' : 'translate-x-full opacity-0'
     }`}
   >
     <div className="flex justify-between items-center p-4 border-b">
