@@ -2,18 +2,22 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Calendar, Book, LogIn, UserPlus } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
-const NavLink = ({ href, label, icon: Icon }: { href: string; label: string; icon: React.ElementType }) => (
-  <Link href={href} className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors duration-200">
-    <Icon className="w-5 h-5" />
-    <span className="font-medium">{label}</span>
+const NavLink = ({ href, label }: { href: string; label: string }) => (
+  <Link href={href} className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+    {label}
   </Link>
 );
 
 const Logo = () => (
   <Link href="/" className="text-xl font-bold text-gray-900">
-    SharedIftar
+    <span className="sr-only">SharedIftar</span>
+    <img 
+      className="h-8 w-auto"
+      src="/logo.svg" 
+      alt="SharedIftar Logo"
+    />
   </Link>
 );
 
@@ -21,44 +25,47 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
   <>
     {/* Overlay */}
     <div
-      className={`fixed inset-0 bg-black transition-opacity duration-300 ${
-        isOpen ? "opacity-60 pointer-events-auto" : "opacity-0 pointer-events-none"
+      className={`fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity ${
+        isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       }`}
       onClick={onClose}
     />
 
     {/* Menu */}
     <div
-      className={`fixed top-0 right-0 bottom-0 w-9/12 max-w-sm bg-white shadow-lg z-50 transition-transform duration-300 ${
+      className={`fixed top-0 right-0 bottom-0 w-72 bg-white p-4 transition transform ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      <div className="flex justify-between items-center px-6 py-4 border-b">
-        <Logo />
+      <div className="flex justify-end">
         <button
           onClick={onClose}
-          className="text-gray-500 hover:text-gray-700 transition-colors duration-200"
+          className="text-gray-500 hover:text-gray-600 focus:outline-none"
         >
-          <X className="w-6 h-6" />
+          <X className="h-6 w-6" />
         </button>
       </div>
 
-      <nav className="p-6 space-y-4">
-        <NavLink href="/iftar" label="Find Iftar" icon={Calendar} />
-        <NavLink href="/share-iftar" label="Share Iftar" icon={Calendar} />
-        <NavLink href="/recipes" label="Recipes" icon={Book} />
-
-        <div className="border-t mt-4 pt-4">
-          <NavLink href="/signin" label="Sign In" icon={LogIn} />
-          <Link
-            href="/signup"
-            className="flex items-center gap-2 mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg transition-all duration-200 hover:bg-blue-700"
-          >
-            <UserPlus className="w-5 h-5" />
-            <span className="font-medium">Sign Up</span>
-          </Link>
-        </div>
+      <nav className="mt-8 space-y-2">
+        <NavLink href="/iftar" label="Find Iftar" />
+        <NavLink href="/share-iftar" label="Share Iftar" />
+        <NavLink href="/recipes" label="Recipes" />
       </nav>
+
+      <div className="mt-8 pt-8 border-t border-gray-200">
+        <Link
+          href="/signin"
+          className="block px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900"
+        >
+          Sign In
+        </Link>
+        <Link
+          href="/signup"
+          className="mt-4 w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
+        >
+          Sign Up
+        </Link>
+      </div>
     </div>
   </>
 );
@@ -67,26 +74,33 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white border-b border-gray-200">
+    <header className="bg-white shadow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center h-16">
-          <Logo />
-          
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-10">
-            <NavLink href="/iftar" label="Find Iftar" icon={Calendar} />
-            <NavLink href="/share-iftar" label="Share Iftar" icon={Calendar} />
-            <NavLink href="/recipes" label="Recipes" icon={Book} />
-          </nav>
+          <div className="flex">
+            <Logo />
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:ml-10 md:flex md:space-x-8">
+              <NavLink href="/iftar" label="Find Iftar" />
+              <NavLink href="/share-iftar" label="Share Iftar" />
+              <NavLink href="/recipes" label="Recipes" />
+            </nav>
+          </div>
 
           {/* Desktop Sign In/Up */}
-          <div className="hidden md:flex items-center space-x-4">
-            <NavLink href="/signin" label="Sign In" icon={LogIn} />
+          <div className="hidden md:flex md:items-center md:space-x-4">
+            <Link
+              href="/signin"
+              className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Sign In
+            </Link>
             <Link
               href="/signup"
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg transition-all duration-200 hover:bg-blue-700"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
             >
-              <span className="font-medium">Sign Up</span>
+              Sign Up
             </Link>
           </div>
 
@@ -94,19 +108,20 @@ const Header = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="text-gray-500 hover:text-gray-700 transition-colors duration-200"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-600 focus:outline-none"
             >
-              <Menu className="w-6 h-6" />
+              <span className="sr-only">Open menu</span>
+              <Menu className="h-6 w-6" />
             </button>
           </div>
-
-          {/* Mobile Menu */}
-          <MobileMenu
-            isOpen={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(false)}
-          />
         </div>
       </div>
+      
+      {/* Mobile Menu */}
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)} 
+      />
     </header>
   );
 };
