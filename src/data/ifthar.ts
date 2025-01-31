@@ -3,8 +3,9 @@ interface User {
   name: string;
   location: string;
   rating: number;
-  image: string;
   totalHosted?: number;
+  verifiedHost?: boolean;
+  preferredLanguages?: string[];
 }
 
 interface IftarGathering {
@@ -13,7 +14,6 @@ interface IftarGathering {
   description: string;
   capacity: number;
   type: 'community' | 'home' | 'mosque';
-  images: string[];
   iftarTime: string;
   menu: {
     category: 'main' | 'side' | 'dessert' | 'drink';
@@ -24,40 +24,44 @@ interface IftarGathering {
   hostId: string;
   host: User;
   location: string;
+  region: string;
   status: 'open' | 'full' | 'completed';
   guestsCount: number;
   additionalInfo?: {
     accessibility?: string[];
     parking?: boolean;
     languages?: string[];
+    prayerFacilities?: boolean;
+    familyFriendly?: boolean;
+    womenOnly?: boolean;
+    childrenWelcome?: boolean;
   };
 }
 
 export const iftarGatherings: IftarGathering[] = [
   {
     id: '1',
-    title: 'Traditional Maldivian Iftar Gathering',
-    description: 'Join us for a blessed evening of traditional Maldivian iftar dishes and community bonding. All are welcome!',
-    capacity: 8,
+    title: 'Traditional Middle Eastern Iftar',
+    description: 'Join us for a blessed evening of traditional Middle Eastern dishes and community bonding. Everyone is welcome!',
+    capacity: 12,
     type: 'home',
-    images: ['/gatherings/maldivian-iftar.png'],
     iftarTime: '18:15',
     menu: [
       {
         category: 'main',
-        items: ['Chicken Biryani', 'Tharukaaree Riha', 'Chapati']
+        items: ['Lamb Mansaf', 'Chicken Shawarma', 'Arabic Rice']
       },
       {
         category: 'side',
-        items: ['Samosas', 'Bajiya', 'Mixed Salad']
+        items: ['Hummus', 'Fattoush', 'Fresh Salads']
       },
       {
         category: 'dessert',
-        items: ['Date Pudding', 'Fresh Fruits']
+        items: ['Kunafa', 'Dates', 'Fresh Fruits']
       },
       {
         category: 'drink',
-        items: ['Traditional Lemon Juice', 'Water']
+        items: ['Qamar Al-Din', 'Arabic Coffee', 'Water']
       }
     ],
     dietaryInfo: ['Halal', 'Vegetarian Options Available'],
@@ -65,103 +69,119 @@ export const iftarGatherings: IftarGathering[] = [
     hostId: 'u1',
     host: {
       id: 'u1',
-      name: 'Rishmy',
-      location: 'Malé',
+      name: 'Fatima Ahmed',
+      location: 'Dubai',
       rating: 4.8,
-      image: '/users/host1.jpg',
-      totalHosted: 12
+      totalHosted: 15,
+      verifiedHost: true,
+      preferredLanguages: ['Arabic', 'English']
     },
-    location: 'Malé',
+    location: 'Dubai Marina',
+    region: 'UAE',
     status: 'open',
     guestsCount: 3,
     additionalInfo: {
-      accessibility: ['Wheelchair Accessible'],
+      accessibility: ['Wheelchair Accessible', 'Ground Floor'],
       parking: true,
-      languages: ['Dhivehi', 'English']
+      languages: ['Arabic', 'English'],
+      familyFriendly: true,
+      childrenWelcome: true
     }
   },
   {
     id: '2',
-    title: 'Community Iftar at Central Mosque',
-    description: 'Weekly community iftar gathering at the Central Mosque. Everyone is invited to join in breaking fast together.',
-    capacity: 50,
+    title: 'Grand Community Iftar',
+    description: 'Weekly community iftar gathering at the Islamic Center. Join us in breaking fast together as one community.',
+    capacity: 150,
     type: 'mosque',
-    images: ['/gatherings/mosque-iftar.png'],
     iftarTime: '18:20',
     menu: [
       {
         category: 'main',
-        items: ['Mixed Rice', 'Chicken Curry', 'Fish Curry']
+        items: ['Biryani', 'Grilled Chicken', 'Mixed Rice']
       },
       {
         category: 'side',
-        items: ['Dates', 'Fresh Vegetables', 'Roshi']
+        items: ['Dates', 'Fresh Vegetables', 'Lentil Soup']
       },
       {
         category: 'drink',
-        items: ['Fruit Juice', 'Water']
+        items: ['Fresh Juices', 'Coffee', 'Water']
       }
     ],
-    dietaryInfo: ['Halal', 'Vegetarian Options'],
+    dietaryInfo: ['Halal', 'Vegetarian Options', 'Allergen Information Available'],
     postedAt: '2024-03-10T13:30:00Z',
     hostId: 'u2',
     host: {
       id: 'u2',
-      name: 'Islamic Center',
-      location: 'Hulhumalé',
+      name: 'Islamic Cultural Center',
+      location: 'London',
       rating: 4.9,
-      image: '/users/host2.jpg',
-      totalHosted: 156
+      totalHosted: 200,
+      verifiedHost: true
     },
-    location: 'Hulhumalé',
+    location: 'East London',
+    region: 'UK',
     status: 'open',
-    guestsCount: 28,
+    guestsCount: 85,
     additionalInfo: {
-      accessibility: ['Wheelchair Accessible', 'Family Area Available'],
+      accessibility: ['Wheelchair Accessible', 'Family Area Available', 'Prayer Facilities'],
       parking: true,
-      languages: ['Dhivehi', 'English', 'Arabic']
+      languages: ['English', 'Arabic', 'Urdu'],
+      prayerFacilities: true,
+      familyFriendly: true,
+      childrenWelcome: true
     }
   },
   {
     id: '3',
-    title: 'Neighborhood Iftar Get-Together',
-    description: 'A cozy gathering with neighbors to share iftar and strengthen community bonds.',
-    capacity: 6,
+    title: 'Sisters Community Iftar',
+    description: 'A warm gathering for sisters to break fast together and build community bonds.',
+    capacity: 20,
     type: 'community',
-    images: ['/gatherings/community-iftar.png'],
     iftarTime: '18:15',
     menu: [
       {
         category: 'main',
-        items: ['Homemade Biryani', 'Grilled Fish']
+        items: ['Turkish Kebab', 'Mediterranean Salad']
       },
       {
         category: 'side',
-        items: ['Fresh Salad', 'Homemade Samosas']
+        items: ['Stuffed Grape Leaves', 'Falafel']
       },
       {
         category: 'dessert',
-        items: ['Traditional Sweets', 'Fruits']
+        items: ['Baklava', 'Fresh Fruits']
       },
       {
         category: 'drink',
-        items: ['Mango Juice', 'Water']
+        items: ['Mint Tea', 'Rose Water', 'Water']
       }
     ],
-    dietaryInfo: ['Halal', 'Seafood'],
+    dietaryInfo: ['Halal', 'Vegan Options', 'Gluten-Free Options'],
     postedAt: '2024-03-10T12:00:00Z',
     hostId: 'u3',
     host: {
       id: 'u3',
-      name: 'Shifna',
-      location: 'Hulhumalé',
+      name: 'Aisha Rahman',
+      location: 'Toronto',
       rating: 4.9,
-      image: '/users/host3.jpg',
-      totalHosted: 8
+      totalHosted: 12,
+      verifiedHost: true,
+      preferredLanguages: ['English', 'Arabic']
     },
-    location: 'Hulhumalé',
+    location: 'Downtown Toronto',
+    region: 'Canada',
     status: 'open',
-    guestsCount: 2
+    guestsCount: 8,
+    additionalInfo: {
+      accessibility: ['Elevator Access'],
+      parking: true,
+      languages: ['English', 'Arabic'],
+      womenOnly: true,
+      familyFriendly: true,
+      childrenWelcome: true
+    }
   }
 ];
 

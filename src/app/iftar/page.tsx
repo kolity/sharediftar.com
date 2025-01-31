@@ -3,10 +3,22 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Heart, Search, Home, MapPin, Clock, Users } from 'lucide-react';
+import { 
+  Heart, 
+  Search, 
+  Home, 
+  MapPin, 
+  Clock, 
+  Users, 
+  Landmark,
+  UtensilsCrossed,
+  Globe2,
+  Languages,
+  AccessibilityIcon,
+  Star
+} from 'lucide-react';
 import ShareForm from './shareform';
 import Link from 'next/link';
-import Image from 'next/image';
 import { iftarGatherings, type IftarGathering } from '@/data/ifthar';
 
 interface FeaturedGatheringProps {
@@ -16,7 +28,7 @@ interface FeaturedGatheringProps {
 const TypeIcon = ({ type }: { type: string }) => {
   switch (type) {
     case 'mosque':
-      return <span className="text-sm">🕌</span>;
+      return <Landmark className="w-4 h-4" />;
     case 'community':
       return <Users className="w-4 h-4" />;
     case 'home':
@@ -27,23 +39,14 @@ const TypeIcon = ({ type }: { type: string }) => {
 };
 
 const FeaturedGathering: React.FC<FeaturedGatheringProps> = ({ gathering }) => (
-  <div className="bg-white rounded-2xl p-6 shadow-lg">
-    <div className="aspect-video relative rounded-xl overflow-hidden mb-4">
-      <Image 
-        src={gathering.images[0]}
-        alt={gathering.title}
-        fill
-        className="object-cover"
-      />
-    </div>
-    <div className="flex items-start justify-between mb-4">
-      <div>
-        <h3 className="text-xl font-bold text-gray-900">{gathering.title}</h3>
-        <p className="text-gray-500">
-          <span className="text-green-600">{gathering.capacity - gathering.guestsCount} spaces available</span>
-        </p>
-      </div>
-      <div className="bg-red-50 text-red-600 px-3 py-1 rounded-full text-sm flex items-center gap-2">
+  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+    {/* Type Badge and Host Info */}
+    <div className="flex items-center justify-between mb-6">
+      <div className={`px-4 py-2 rounded-full text-sm flex items-center gap-2 ${
+        gathering.type === 'mosque' ? 'bg-green-50 text-green-600' :
+        gathering.type === 'home' ? 'bg-blue-50 text-blue-600' :
+        'bg-purple-50 text-purple-600'
+      }`}>
         <TypeIcon type={gathering.type} />
         <span className="capitalize">
           {gathering.type === 'mosque' ? 'Mosque Iftar' : 
@@ -51,19 +54,92 @@ const FeaturedGathering: React.FC<FeaturedGatheringProps> = ({ gathering }) => (
            'Community Iftar'}
         </span>
       </div>
+      {gathering.host.verifiedHost && (
+        <div className="flex items-center gap-1 text-blue-600">
+          <Star className="w-4 h-4 fill-current" />
+          <span className="text-xs">Verified Host</span>
+        </div>
+      )}
     </div>
-    <div className="flex items-center gap-4 text-gray-500 text-sm mb-4">
-      <div className="flex items-center gap-1">
-        <MapPin className="w-4 h-4" />
-        <span>{gathering.location}</span>
+
+    <div className="space-y-4">
+      <div>
+        <h3 className="text-xl font-bold text-gray-900 mb-2">{gathering.title}</h3>
+        <p className="text-gray-600 text-sm line-clamp-2 mb-2">{gathering.description}</p>
+        <p className="text-gray-500">
+          <span className="text-green-600 font-medium">{gathering.capacity - gathering.guestsCount} spaces available</span>
+          <span className="text-gray-400"> of {gathering.capacity}</span>
+        </p>
       </div>
-      <div className="flex items-center gap-1">
-        <Users className="w-4 h-4" />
-        <span>Hosted by {gathering.host.name}</span>
+
+      {/* Menu Preview */}
+      <div className="flex flex-wrap gap-2">
+        {gathering.menu.slice(0, 2).map((category, index) => (
+          category.items[0] && (
+            <span 
+              key={index}
+              className="bg-gray-50 text-gray-600 px-2 py-1 rounded-full text-sm flex items-center gap-1"
+            >
+              <UtensilsCrossed className="w-3 h-3" />
+              {category.items[0]}
+              {category.items.length > 1 && ` +${category.items.length - 1}`}
+            </span>
+          )
+        ))}
       </div>
-      <div className="flex items-center gap-1">
-        <Clock className="w-4 h-4" />
-        <span>{gathering.iftarTime}</span>
+
+      {/* Tags Section */}
+      <div className="flex flex-wrap gap-2">
+        {gathering.additionalInfo?.languages && (
+          <span className="bg-purple-50 text-purple-600 px-2 py-1 rounded-full text-xs flex items-center gap-1">
+            <Languages className="w-3 h-3" />
+            {gathering.additionalInfo.languages.join(', ')}
+          </span>
+        )}
+        {gathering.additionalInfo?.accessibility?.map((access) => (
+          <span 
+            key={access}
+            className="bg-green-50 text-green-600 px-2 py-1 rounded-full text-xs flex items-center gap-1"
+          >
+            <AccessibilityIcon className="w-3 h-3" />
+            {access}
+          </span>
+        ))}
+      </div>
+
+      {/* Location and Time */}
+      <div className="flex items-center gap-4 text-gray-500 text-sm">
+        <div className="flex items-center gap-1">
+          <MapPin className="w-4 h-4" />
+          <span>{gathering.location}</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <Globe2 className="w-4 h-4" />
+          <span>{gathering.region}</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <Clock className="w-4 h-4" />
+          <span>{gathering.iftarTime}</span>
+        </div>
+      </div>
+
+      {/* Host Info */}
+      <div className="flex items-center justify-between pt-4 border-t">
+        <div className="flex items-center gap-2">
+          <Users className="w-4 h-4 text-gray-500" />
+          <span className="text-sm text-gray-600">
+            Hosted by {gathering.host.name}
+            {gathering.host.totalHosted && (
+              <span className="text-gray-400"> · {gathering.host.totalHosted} hosted</span>
+            )}
+          </span>
+        </div>
+        <Link 
+          href={`/iftars/${gathering.id}`}
+          className="text-red-500 text-sm font-medium hover:text-red-600"
+        >
+          View Details →
+        </Link>
       </div>
     </div>
   </div>
@@ -90,7 +166,13 @@ const SharePage = () => {
 
         {/* Featured Gatherings Section */}
         <div className="max-w-7xl mx-auto px-4 py-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">Featured Iftar Gatherings</h2>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-gray-900">Featured Iftar Gatherings</h2>
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              <Globe2 className="w-4 h-4" />
+              <span>Worldwide Community</span>
+            </div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {featuredGatherings.map((gathering) => (
               <FeaturedGathering key={gathering.id} gathering={gathering} />
