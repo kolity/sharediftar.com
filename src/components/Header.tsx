@@ -27,39 +27,53 @@ const BrandName = () => (
 );
 
 const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
-  <div 
-    className={`fixed inset-0 bg-white/95 backdrop-blur-sm z-50 transform transition-all duration-300 ${
-      isOpen ? 'translate-x-0 opacity-60' : 'translate-x-full opacity-0'
-    }`}
-  >
-    <div className="flex justify-between items-center p-4 border-b">
-      <BrandName />
-      <button 
-        onClick={onClose} 
-        className="p-2 hover:bg-red-50 rounded-lg transition-colors duration-200"
-      >
-        <X className="w-6 h-6 text-gray-600" />
-      </button>
-    </div>
-    
-    <nav className="p-6">
-      <div className="flex flex-col gap-6">
-        <NavLink href="/iftar" icon={UtensilsCrossed}>Find Iftar</NavLink>
-        <NavLink href="/recipes" icon={Book}>Recipes</NavLink>
-        
-        <div className="border-t my-6"></div>
-        
-        <NavLink href="/signin" icon={LogIn}>Sign in</NavLink>
-        <Link 
-          href="/signup" 
-          className="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl shadow-lg shadow-red-100 hover:shadow-red-200 transition-all duration-200 hover:-translate-y-0.5"
+  <>
+    <div
+      className={`fixed inset-0 bg-black transition-opacity duration-300 ${
+        isOpen ? "opacity-50 pointer-events-auto" : "opacity-0 pointer-events-none"
+      }`}
+      onClick={onClose}
+    ></div>
+    <div
+      className={`fixed top-0 right-0 bottom-0 w-9/12 max-w-sm bg-white shadow-lg z-50 transition-transform duration-300 ${
+        isOpen ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
+      <div className="flex justify-between items-center p-4 border-b">
+        <BrandName />
+        <button
+          onClick={onClose}
+          className="p-2 hover:bg-red-50 rounded-lg transition-colors duration-200"
         >
-          <UserPlus className="w-5 h-5" />
-          <span className="font-semibold">Join the Community</span>
-        </Link>
+          <X className="w-6 h-6 text-gray-600" />
+        </button>
       </div>
-    </nav>
-  </div>
+
+      <nav className="p-6">
+        <div className="flex flex-col gap-6">
+          <NavLink href="/iftar" icon={UtensilsCrossed}>
+            Find Iftar
+          </NavLink>
+          <NavLink href="/recipes" icon={Book}>
+            Recipes
+          </NavLink>
+
+          <div className="border-t my-6"></div>
+
+          <NavLink href="/signin" icon={LogIn}>
+            Sign in
+          </NavLink>
+          <Link
+            href="/signup"
+            className="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl shadow-lg shadow-red-100 hover:shadow-red-200 transition-all duration-200 hover:-translate-y-0.5"
+          >
+            <UserPlus className="w-5 h-5" />
+            <span className="font-semibold">Join the Community</span>
+          </Link>
+        </div>
+      </nav>
+    </div>
+  </>
 );
 
 const Header = () => {
