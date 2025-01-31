@@ -29,8 +29,8 @@ const BrandName = () => (
 const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
   <>
     <div
-      className={`fixed inset-0 bg-black transition-opacity duration-300 ${
-        isOpen ? "opacity-50 pointer-events-auto" : "opacity-0 pointer-events-none"
+      className={`fixed inset-0 bg-white/80 backdrop-blur-sm transition-opacity duration-300 ${
+        isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       }`}
       onClick={onClose}
     ></div>
@@ -84,7 +84,6 @@ const Header = () => {
       <nav className="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
         <BrandName />
         
-        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-12">
           <div className="flex items-center gap-4">
             <NavLink href="/iftar" icon={UtensilsCrossed}>Find Iftar</NavLink>
@@ -103,7 +102,6 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu Button */}
         <button 
           className="md:hidden p-2 hover:bg-red-50 rounded-lg transition-colors duration-200"
           onClick={() => setIsMobileMenuOpen(true)}
@@ -111,7 +109,6 @@ const Header = () => {
           <Menu className="w-6 h-6 text-gray-600" />
         </button>
 
-        {/* Mobile Menu */}
         <MobileMenu 
           isOpen={isMobileMenuOpen} 
           onClose={() => setIsMobileMenuOpen(false)} 
