@@ -35,7 +35,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
       onClick={onClose}
     ></div>
     <div
-      className={`fixed top-0 right-0 bottom-0 w-9/12 max-w-sm bg-white shadow-lg z-50 transition-transform duration-300 ${
+      className={`fixed top-0 right-0 bottom-0 w-9/12 max-w-sm bg-white/90 shadow-lg z-50 transition-transform duration-300 ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
