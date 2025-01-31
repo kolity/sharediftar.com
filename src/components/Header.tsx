@@ -113,7 +113,7 @@ const Header = () => {
         >
           <Menu className="w-6 h-6 text-gray-600" />
         </button>
-        
+
         {/* Mobile Menu */}
         <MobileMenu 
           isOpen={isMobileMenuOpen} 
