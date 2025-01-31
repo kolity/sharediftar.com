@@ -1,32 +1,68 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
-import { UserPlus, Mail, Lock, User, MapPin } from 'lucide-react';
-import Image from 'next/image';
+import { UserPlus, Mail, Lock, User, MapPin, Heart, Users, Calendar } from 'lucide-react';
 
 const SignUpPage = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      <div className="flex-1 bg-gradient-to-br from-red-500 to-red-600 p-8 hidden md:flex flex-col justify-center">
-        <div className="max-w-md mx-auto text-white">
-          <Image 
-            src="/logo.png" 
-            alt="Roadha.com" 
-            width={80} 
-            height={80} 
-            className="mb-8"
-          />
-          <h1 className="text-4xl font-bold mb-4">Join Our Community</h1>
-          <p className="text-xl text-white/90">
-            Connect with others and share the blessings of Ramadan
-          </p>
+      {/* Left Panel */}
+      <div className="flex-1 bg-gradient-to-br from-red-500 to-red-600 p-8 hidden md:flex flex-col justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-pattern opacity-10"></div>
+        <div className="max-w-md mx-auto text-white relative z-10 space-y-8">
+          <div className="flex items-center gap-3">
+            <Heart className="w-10 h-10" />
+            <span className="text-2xl font-bold">SharedIftar.com</span>
+          </div>
+          
+          <div className="space-y-6">
+            <h1 className="text-4xl font-bold">Join Our Community</h1>
+            <p className="text-xl text-white/90">
+              Connect with others and share the blessings of Ramadan
+            </p>
+          </div>
+
+          <div className="space-y-6 pt-8">
+            <div className="flex items-start gap-4">
+              <div className="p-2 bg-white/10 rounded-lg">
+                <Users className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">Build Connections</h3>
+                <p className="text-white/80">Connect with your local Muslim community</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="p-2 bg-white/10 rounded-lg">
+                <Heart className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">Share Blessings</h3>
+                <p className="text-white/80">Host or join Iftar gatherings</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="p-2 bg-white/10 rounded-lg">
+                <Calendar className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">Experience Ramadan</h3>
+                <p className="text-white/80">Make the most of this blessed month</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
+      {/* Right Panel - Sign Up Form */}
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-gray-900">Create an account</h2>
-            <p className="text-gray-600 mt-2">Sign up to start sharing and discovering</p>
+            <p className="text-gray-600 mt-2">Join our community and start sharing</p>
           </div>
 
           <form className="space-y-6">
@@ -38,7 +74,7 @@ const SignUpPage = () => {
                   <input
                     type="text"
                     placeholder="First name"
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-shadow"
                   />
                 </div>
               </div>
@@ -49,7 +85,7 @@ const SignUpPage = () => {
                   <input
                     type="text"
                     placeholder="Last name"
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-shadow"
                   />
                 </div>
               </div>
@@ -62,7 +98,7 @@ const SignUpPage = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-shadow"
                 />
               </div>
             </div>
@@ -74,7 +110,7 @@ const SignUpPage = () => {
                 <input
                   type="text"
                   placeholder="Your location"
-                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-shadow"
                 />
               </div>
             </div>
@@ -86,17 +122,17 @@ const SignUpPage = () => {
                 <input
                   type="password"
                   placeholder="Create a password"
-                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent transition-shadow"
                 />
               </div>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-red-200 hover:shadow-red-300 transition-all duration-200 hover:-translate-y-0.5"
             >
               <UserPlus className="w-5 h-5" />
-              Create Account
+              Join the Community
             </button>
           </form>
 
