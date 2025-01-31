@@ -3,8 +3,7 @@ import { Search, Heart, Share2, Users } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="relative bg-cover bg-center min-h-screen md:min-h-[85vh]" style={{ backgroundImage: "url('/hero-bg.png')" }}>
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
+    <section className="relative bg-gradient-to-br from-red-50 to-red-100 min-h-screen md:min-h-[85vh]">
       <div className="relative max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
         <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 md:p-10 shadow-xl">
           <h1 className="text-2xl md:text-4xl font-bold mb-4 text-gray-900">

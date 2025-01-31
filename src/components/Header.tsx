@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, UtensilsCrossed, Book, LogIn, UserPlus, Heart } from 'lucide-react';
+import { Menu, X, UtensilsCrossed, Book, LogIn, UserPlus, Heart, Share } from 'lucide-react';
 
 const NavLink = ({ href, icon: Icon, children }: { href: string; icon: React.ElementType; children: React.ReactNode }) => (
-  <Link 
-    href={href} 
+  <Link
+    href={href}
     className="group flex items-center gap-2 text-gray-600 font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-red-50"
   >
     <Icon className="w-5 h-5 text-red-500 transition-transform duration-200 group-hover:scale-110" />
@@ -57,6 +57,9 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
           <NavLink href="/iftar" icon={UtensilsCrossed}>
             Find Iftar
           </NavLink>
+          <NavLink href="/share-iftar" icon={Share}>
+            Share Iftar
+          </NavLink>
           <NavLink href="/recipes" icon={Book}>
             Recipes
           </NavLink>
@@ -91,6 +94,7 @@ const Header = () => {
         <div className="hidden md:flex items-center gap-12">
           <div className="flex items-center gap-4">
             <NavLink href="/iftar" icon={UtensilsCrossed}>Find Iftar</NavLink>
+            <NavLink href="/share-iftar" icon={Share}>Share Iftar</NavLink>    
             <NavLink href="/recipes" icon={Book}>Recipes</NavLink>
           </div>
           
