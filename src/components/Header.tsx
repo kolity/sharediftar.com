@@ -4,18 +4,32 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, UtensilsCrossed, Book, LogIn, UserPlus, Heart } from 'lucide-react';
 
-const NavLink = ({ href, icon: Icon, children }: { href: string; icon: React.ElementType; children: React.ReactNode }) => (
-  <Link 
-    href={href} 
-    className="group flex items-center gap-2 text-gray-600 font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-red-50"
-  >
-    <Icon className="w-5 h-5 text-red-500 transition-transform duration-200 group-hover:scale-110" />
-    <span className="relative">
-      {children}
-      <span className="absolute inset-x-0 bottom-0 h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
-    </span>
-  </Link>
-);
+const NavLink = ({ href, icon: Icon, children, isMobile }: { href: string; icon: React.ElementType; children: React.ReactNode; isMobile?: boolean }) => {
+  if (isMobile) {
+    return (
+      <Link 
+        href={href} 
+        className="flex items-center gap-2 text-gray-700 font-medium px-4 py-3 bg-gray-50 rounded-xl transition-all duration-200 hover:bg-gray-100 hover:scale-[1.02]"
+      >
+        <Icon className="w-5 h-5 text-red-500" />
+        <span>{children}</span>
+      </Link>
+    );
+  }
+  
+  return (
+    <Link 
+      href={href} 
+      className="group flex items-center gap-2 text-gray-600 font-medium px-3 py-2 rounded-lg transition-all duration-200 hover:bg-red-50"
+    >
+      <Icon className="w-5 h-5 text-red-500 transition-transform duration-200 group-hover:scale-110" />
+      <span className="relative">
+        {children}
+        <span className="absolute inset-x-0 bottom-0 h-0.5 bg-red-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
+      </span>
+    </Link>
+  );
+};
 
 const BrandName = () => (
   <Link href="/" className="flex items-center group">
@@ -29,13 +43,13 @@ const BrandName = () => (
 const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
   <>
     <div
-      className={`fixed inset-0 bg-white/80 backdrop-blur-sm transition-opacity duration-300 ${
-        isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      className={`fixed inset-0 bg-black transition-opacity duration-300 ${
+        isOpen ? "opacity-70 pointer-events-auto" : "opacity-0 pointer-events-none"
       }`}
       onClick={onClose}
     ></div>
     <div
-      className={`fixed top-0 right-0 bottom-0 w-9/12 max-w-sm bg-white/95 rounded-lg shadow-lg z-50 space-y-6 transition-transform duration-300 ${
+      className={`fixed top-0 right-0 bottom-0 w-9/12 max-w-sm bg-white rounded-l-2xl shadow-xl z-50 transition-transform duration-300 ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
@@ -49,29 +63,33 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         </button>
       </div>
 
-      <nav className="p-6">
-        <div className="flex flex-col gap-6">
-          <NavLink href="/iftar" icon={UtensilsCrossed}>
-            Find Iftar
-          </NavLink>
-          <NavLink href="/recipes" icon={Book}>
-            Recipes
-          </NavLink>
-
-          <div className="border-t my-6"></div>
-
-          <NavLink href="/signin" icon={LogIn}>
-            Sign in
-          </NavLink>
-          <Link
-            href="/signup"
-            className="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl shadow-lg shadow-red-100 hover:shadow-red-200 transition-all duration-200 hover:-translate-y-0.5"
-          >
-            <UserPlus className="w-5 h-5" />
-            <span className="font-semibold">Join the Community</span>
-          </Link>
+      <div className="flex flex-col h-[calc(100%-76px)]">
+        <nav className="flex-1 p-4 overflow-y-auto">
+          <div className="flex flex-col gap-3">
+            <NavLink href="/iftar" icon={UtensilsCrossed} isMobile>
+              Find Iftar
+            </NavLink>
+            <NavLink href="/recipes" icon={Book} isMobile>
+              Recipes
+            </NavLink>
+          </div>
+        </nav>
+        
+        <div className="border-t p-4">
+          <div className="flex flex-col gap-3">
+            <NavLink href="/signin" icon={LogIn} isMobile>
+              Sign in
+            </NavLink>
+            <Link
+              href="/signup"
+              className="flex items-center justify-center gap-3 p-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-medium shadow-lg shadow-red-100 hover:shadow-red-200 transition-all duration-200 hover:scale-[1.02]"
+            >
+              <UserPlus className="w-5 h-5" />
+              <span>Join the Community</span>
+            </Link>
+          </div>
         </div>
-      </nav>
+      </div>
     </div>
   </>
 );
@@ -80,7 +98,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-gray-100">
+    <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
       <nav className="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
         <BrandName />
         
